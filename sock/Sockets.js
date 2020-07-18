@@ -24,7 +24,7 @@ class User {
       x: this.x,
       y: this.y,
       message: this.message,
-      profile: this.profile,
+      //profile: this.profile,
     };
   }
 }
@@ -58,6 +58,7 @@ function setupConnection(io, socket) {
   // handle disconnect
   socket.on("disconnect", (reason) =>{
     let index = users.findIndex(o => o.socket.id == socket.id);
+    if(index < 0) return;
     // emit an event incase we want to do a disconnect animation or something
     // io.emit("user_disconnect", {x: user.x, y: user.y});
     //console.log(`Socket ${socket.id} (name: ${users[index].name}) disconnected: ${reason}`);
