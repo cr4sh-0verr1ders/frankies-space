@@ -33,6 +33,7 @@ function setupConnection(io, socket) {
 
   // we push the user onto the stack with placeholder name and image uri, awaiting identification event
   let user = new User(socket, socket.id, "/")
+  users.push(user);
 
   // print socket id
   console.log(`New connection: ${socket.id}`);
@@ -47,16 +48,15 @@ function setupConnection(io, socket) {
         console.log(identity);
 
         socket.emit("identified", identity);
-        users.push(user);
     });
   });
 
   // we want to handle disconnect events before the socket object is sent to the shadow realm
   // handle disconnect
-  socket.on("disconnecting", (reason) =>{
+  socket.on("disconnect", (reason) =>{
     let index = users.findIndex(o => o.socket.id == socket.id);
     // emit an event incase we want to do a disconnect animation or something
-    io.emit("user_disconnect", {x: user.x, y: user.y});
+    // io.emit("user_disconnect", {x: user.x, y: user.y});
     //console.log(`Socket ${socket.id} (name: ${users[index].name}) disconnected: ${reason}`);
 
     // pop from stack

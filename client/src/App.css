@@ -23,13 +23,13 @@ html, body, #root, .App {
 
 .user {
   --size: 50px;
-  width: var(--size);
+  width: 100%;
   height: var(--size);
   position: absolute;
   font-size: 20px;
   text-align: center;
 
-  left: calc(50% - var(--origin-x) - var(--size)/2);
+  left: calc(1px - var(--origin-x) - var(--size)/2);
   top: calc(50% - var(--origin-y) - var(--size)/2);
   transform: translate(var(--user-x), var(--user-y));
   transition-property: transform;
