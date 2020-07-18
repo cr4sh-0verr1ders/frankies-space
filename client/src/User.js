@@ -36,7 +36,7 @@ function Avatar(props) {
       <div
         className="name"
       >
-        {user.name}
+        {user.x}, {user.y}
       </div>
     </div>
   );
