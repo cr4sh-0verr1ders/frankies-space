@@ -61,7 +61,7 @@ class AI extends User {
 }
 
 let waypoints = [[3857,1796], [3805,2004], [4380,2121], [4406, 2030], [4170,1978], [4133,1908], [4247, 1755], [4091,1748]]
-const frankie = new AI(4010, 1882, "Frankie","http://localhost:8080/frankie.png", waypoints);
+const frankie = new AI(4010, 1882, "Frankie","https://unswio.herokuapp.com/frankie.png", waypoints);
 users.push(frankie);
 console.log("Franky is ")
 console.log(frankie);
@@ -112,8 +112,8 @@ function setupConnection(io, socket) {
 
   // handle chat message
   socket.on("message", (msg) => {
-    // drop msg if over 1000 characters 
-    if(msg.length > 1000) return; 
+    // drop msg if over 400 characters 
+    if(msg.length > 400) return; 
       
     // get relevant user
     if(user.messageTimeout) clearTimeout(user.messageTimeout);
