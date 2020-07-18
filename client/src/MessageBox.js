@@ -13,6 +13,8 @@ function MessageBox() {
       socket.emit("message", event.target.value)
       event.target.value = ""
     }
+
+    event.stopPropagation(); // don't trigger movement
   }
 
   return (
