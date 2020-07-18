@@ -7,6 +7,7 @@ const defaultUserData = {
   x: 3000,
   y: 2500,
   name: "Placeholder",
+  message: "",
   icon: defaultIcon,
   id: "",
 }
@@ -15,23 +16,10 @@ class User {
   constructor(data = defaultUserData) {
     this.x = data.x;
     this.y = data.y;
-    this.message = "msg";
+    this.message = data.message;
     this.name = data.name;
     this.icon = defaultIcon;
     this.id = data.socket_id;
-  }
-
-  public() {
-    return {
-      x: this.x,
-      y: this.y,
-      name: this.name,
-      id: this.socket_id,
-    }
-  }
-
-  clone() {
-    return new User(this.public());
   }
 
   step(dx, dy) {
@@ -48,11 +36,9 @@ class User {
     return this;
   }
 
-  withMessage(msg) {
-    let newThis = this.clone();
-    newThis.message = msg;
-    console.log("Setting message", msg, this, newThis);
-    return newThis;
+  setMessage(msg) {
+    this.message = msg;
+    return this;
   }
 
   setId(id) {

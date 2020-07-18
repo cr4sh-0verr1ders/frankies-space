@@ -8,12 +8,20 @@ class User {
     this.socket = socket;
     this.name = name;
     this.image_uri = image_uri;
+    this.message = "";
     this.x = 0; // change start coords later
     this.y = 0;
   }
 
   public(){
-    return {socket_id: this.socket.id, name: this.name, image_uri: this.image_uri, x: this.x, y: this.y};
+    return {
+      socket_id: this.socket.id,
+      name: this.name,
+      image_uri: this.image_uri,
+      x: this.x,
+      y: this.y,
+      message: this.message,
+    };
   }
 }
 
@@ -21,19 +29,20 @@ function setupConnection(io, socket) {
   // broadcast new connection to other clients
   // by default, set their name to their socket id
 
+  // we push the user onto the stack with placeholder name and image uri, awaiting identification event
+  let user = new User(socket, socket.id, "/")
+  users.push(user);
+
   // print socket id
   console.log(`New connection: ${socket.id}`);
-  // we push the user onto the stack with placeholder name and image uri, awaiting identification event
-  users.push(new User(socket, socket.id, "/"));
 
   // handle the identification event
   socket.on("identify", (token) => {
     console.log("Identification event");
     // grab the facebook auth token and get a name and image uri
     facebook.identify(token,function(identity){
-        let index = users.findIndex(user => user.socket.id === socket.id); 
-        users[index].name = identity.name;
-        users[index].image_uri = identity.uri;
+        user.name = identity.name;
+        user.image_uri = identity.uri;
         console.log(identity);
     });
 
@@ -44,7 +53,7 @@ function setupConnection(io, socket) {
   socket.on("disconnecting", (reason) =>{
     let index = users.findIndex(o => o.socket.id == socket.id);
     // emit an event incase we want to do a disconnect animation or something
-    io.emit("user_disconnect", {x: users[index].x, y: users[index].y});
+    io.emit("user_disconnect", {x: user.x, y: user.y});
     //console.log(`Socket ${socket.id} (name: ${users[index].name}) disconnected: ${reason}`);
 
     // pop from stack
@@ -52,8 +61,6 @@ function setupConnection(io, socket) {
   });
 
   socket.on("position", (pos) => {
-    // get relevant user
-    let user = users.find(user => user.socket === socket);
     // Update position
     user.x = pos.x;
     user.y = pos.y;
@@ -61,9 +68,9 @@ function setupConnection(io, socket) {
 
   // handle chat message
   socket.on("message", (msg) => {
+    // get relevant user
     console.log(`Message from ${socket.id}: ${msg}`);
-    // broadcast to everyone, including the sender
-    io.emit("message_receive", {msg:msg, sender: socket.id});
+    user.message = msg;
   });
 }
 

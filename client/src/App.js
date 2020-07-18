@@ -37,26 +37,6 @@ class App extends Component {
       this.state.self.id = socket.id;
     });
 
-    socket.on("message", (data) => {
-      // Find relevant user
-      if(data.sender === this.state.self.id) {
-        this.setState({
-          ...this.state,
-          self: this.state.self.withMessage(data.msg),
-        });
-      } else {
-        let index = this.state.others.findIndex(user => user.id === data.sender);
-        if(index < 0) return;
-
-        let newOthers = this.state.others.slice();
-        newOthers[index] = newOthers[index].withMessage(data.msg);
-        this.setState({
-          ...this.state,
-          other: newOthers,
-        });
-      }
-    })
-
     socket.on("update", userStates => {
       let users = userStates
         .map(user => new User(user))
@@ -120,6 +100,13 @@ class App extends Component {
     });
   }
 
+  handleMessage(msg) {
+    this.setState({
+      ...this.state,
+      self: this.state.self.setMessage(msg),
+    });
+  }
+
   render() {
     const { self, others } = this.state;
     const cssPosition = {
@@ -142,8 +129,8 @@ class App extends Component {
         <Map />
         {otherAvatars}
         {this.state.isAuthed && <Avatar user={self} />}
-        {this.state.isAuthed && <MessageBox />}
-        {!this.state.isAuthed && <Login setIsAuthed={(this.handleIsAuthed).bind(this)} />}
+        {this.state.isAuthed && <MessageBox onMessage={this.handleMessage.bind(this)} />}
+        {!this.state.isAuthed && <Login setIsAuthed={this.handleIsAuthed.bind(this)} />}
       </div>
     );
   }
