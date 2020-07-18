@@ -1,0 +1,12 @@
+body {
+  height: 100%;
+  width: 100%;
+  overflow-x: hidden;
+  overflow-y: hidden;
+}
+
+.map {
+  position: absolute;
+  left: calc(50% - var(--x) * 1px);
+  top: calc(50% - var(--y) * 1px);
+}
