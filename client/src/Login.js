@@ -3,15 +3,15 @@ import socket from "./socket"
 
 function Login({ setIsAuthed }) {
     window.updateStatus = () => {
-        // try {
-        //     window.FB.getLoginStatus(function(response) {
-                setIsAuthed(true)//response.authResponse != null)
-                // if (response.authResponse) {
-                //     console.log(response.authResponse.accessToken)
-                    // socket.emit("identify", "EAAmSEFg3WZBkBAJrr23N7xMMBmTZARWAxsSZBTAAMyx4lArjZCAmAggmRqWk1K0p2Lx7ZA30SZC9fBUSZBcbM35RWSnc8Asb4lZBW0xhGsV2FzYhcY0Pvrngvz48DhZCiFdhc8QTKo1mbCBUnDg1KnaNQZBXkQiovsXZC2UogAYSnxCZCTZCWOkBm42WNEBnPfY6LfIQZD")//response.authResponse.accessToken);
-    //             }
-    //         })
-    //     } catch(e) {}
+        try {
+            window.FB.getLoginStatus(function(response) {
+                setIsAuthed(response.authResponse != null)
+                if (response.authResponse) {
+                    console.log(response.authResponse.accessToken)
+                    socket.emit("identify", response.authResponse.accessToken);
+                }
+            })
+        } catch(e) {}
     }
 
     useEffect(window.updateStatus, [])

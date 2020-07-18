@@ -1,7 +1,7 @@
 import React, { useRef, useEffect } from 'react'
 import socket from './socket'
 
-function MessageBox() {
+function MessageBox(props) {
   const element = useRef();
 
   useEffect(() => {
@@ -11,6 +11,7 @@ function MessageBox() {
   const onKeyDown = event => {
     if (event.key === "Enter") {
       socket.emit("message", event.target.value)
+      props.onMessage(event.target.value)
       event.target.value = ""
     }
 

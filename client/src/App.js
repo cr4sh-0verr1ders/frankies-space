@@ -19,30 +19,52 @@ class App extends Component {
     super();
 
     this.state = {
-      authed: false,
-      self: new User(3000, 2500),
+      isAuthed: false,
+      self: new User(),
       move: {
         up: false,
         left: false,
         down: false,
         right: false,
       },
-      others: [
-        new User(3000, 2500),
-        new User(3200, 2600),
-      ]
+      others: []
     }
 
     this.handleKeyDown = this.handleKeyDown.bind(this);
     this.handleKeyUp = this.handleKeyUp.bind(this);
 
-    socket.on("message", (data) => {
-      this.state.self.message = data.msg
-    })
+    socket.on("connect", () => {
+      this.state.self.id = socket.id;
+    });
 
-    socket.on("update", data => {
-      // console.log(data)
-    })
+    socket.on("update", userStates => {
+      let users = userStates
+        .map(user => new User(user))
+        .filter(user => user.id !== socket.id);
+      this.setState({
+        ...this.state,
+        others: users,
+      });
+    });
+
+    socket.on("identified", identity => {
+      let self = this.state.self;
+      self.name = identity.name;
+      self.icon = identity.uri;
+      this.setState({
+        ...this.state,
+        self,
+      });
+    });
+
+    socket.on("clearmessage", () => {
+      let { self } = this.state;
+      self.message = "";
+      this.setState({
+        ...this.state,
+        self,
+      });
+    });
   }
 
   componentDidMount() {
@@ -57,6 +79,7 @@ class App extends Component {
         SPEED * (move.down - move.up)
       ),
     });
+    socket.emit("position", {x: self.x, y: self.y});
   }
 
   componentWillUnmount() {
@@ -90,7 +113,17 @@ class App extends Component {
   }
 
   handleIsAuthed(isAuthed) {
-    this.setState({isAuthed})
+    this.setState({
+      ...this.state,
+      isAuthed,
+    });
+  }
+
+  handleMessage(msg) {
+    this.setState({
+      ...this.state,
+      self: this.state.self.setMessage(msg),
+    });
   }
 
   render() {
@@ -115,8 +148,8 @@ class App extends Component {
         <Map />
         {otherAvatars}
         {this.state.isAuthed && <Avatar user={self} />}
-        {this.state.isAuthed && <MessageBox />}
-        {!this.state.isAuthed && <Login setIsAuthed={(this.handleIsAuthed).bind(this)} />}
+        {this.state.isAuthed && <MessageBox onMessage={this.handleMessage.bind(this)} />}
+        {!this.state.isAuthed && <Login setIsAuthed={this.handleIsAuthed.bind(this)} />}
       </div>
     );
   }

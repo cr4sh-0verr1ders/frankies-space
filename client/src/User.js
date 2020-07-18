@@ -2,15 +2,30 @@ import React from 'react';
 import defaultIcon from './default-icon.svg';
 import locationData from "./locations.json";
 import classifyPoint from "robust-point-in-polygon";
+
+const defaultUserData = {
+  x: 3000,
+  y: 2500,
+  name: "Placeholder",
+  message: "",
+  image_uri: defaultIcon,
+  id: "",
+}
+
 class User {
-  constructor(x = 0, y = 0) {
-    this.x = x;
-    this.y = y;
-    this.message = "";
-    this.name = "Luke Fisk-Lennon";
-    this.icon = defaultIcon;
-    this.location = "UNSW"
-    this.id = Math.floor(Math.random() * 10000);
+  constructor(data) {
+    if (!data) {
+      data = defaultUserData
+      this.self = true
+    } else {
+      this.self = false
+    }
+    this.x = data.x;
+    this.y = data.y;
+    this.message = data.message;
+    this.name = data.name;
+    this.icon = data.image_uri;
+    this.id = data.socket_id;
   }
 
   step(dx, dy) {
@@ -27,19 +42,30 @@ class User {
     }
     return this;
   }
+
+  setMessage(msg) {
+    this.message = msg;
+    return this;
+  }
+
+  setId(id) {
+    this.id = id;
+    return this;
+  }
 }
 
 function Avatar(props) {
   const { user } = props;
-  const cssPosition = {
+  const style = {
     "--user-x": user.x,
-    "--user-y": user.y,
+    "--user-y": user.y
   };
+  if (user.self) style.transition = "none"
 
   return (
     <div
       className="user"
-      style={cssPosition}
+      style={style}
     >
       <img
         className="avatar"
@@ -48,7 +74,7 @@ function Avatar(props) {
       <div
         className="name"
       >
-        {user.x}, {user.y}
+        {user.name}
       </div>
       <div
         className="message acrylic"
