@@ -68,6 +68,24 @@ html, body, #root, .App {
   transform-origin: 0% 100%;
 }
 
+.Geofence {
+  position: fixed;
+  display: inline-block;
+
+  width: 300px;
+  text-align: center;
+  left: 0;
+  right: 0;
+  margin-left: auto;
+  margin-right: auto;
+
+  top: 8px;
+  padding: 8px 16px;
+  color: white;
+  transition: 0.3s;
+  transform-origin: 50% 0%;
+}
+
 .acrylic {
   background-color: rgba(0, 0, 0, 0.5);
   backdrop-filter: blur(15px);
