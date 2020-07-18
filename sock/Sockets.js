@@ -44,11 +44,15 @@ function setupConnection(socket) {
     console.log(`Socket ${socket.id} (name: ${users[index].name}) disconnected: ${reason}`);
 
     // pop from stack
-    // users = users.filter(function(o) {
-    //     return o.socket !== socket;
-    // });
     users.splice(index, 1);
+  });
 
+  socket.on("position", (pos) => {
+    // get relevant user
+    let user = users.find(user => user.socket === socket);
+    // Update position
+    user.x = pos.x;
+    user.y = pos.y;
   });
 
   // handle chat message
