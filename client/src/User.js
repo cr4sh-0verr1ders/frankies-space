@@ -70,8 +70,8 @@ class User {
 function Avatar(props) {
   const { user } = props;
   const style = {
-    "--user-x": user.x,
-    "--user-y": user.y
+    "--user-x": user.x + "px",
+    "--user-y": user.y + "px"
   };
   if (user.self) style.transition = "none"
 
