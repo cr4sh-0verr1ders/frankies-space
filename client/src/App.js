@@ -98,8 +98,8 @@ class App extends Component {
         style={cssPosition}
       >
         <Map />
-        <Avatar user={self} />
         {otherAvatars}
+        <Avatar user={self} />
         <MessageBox />
       </div>
     );
