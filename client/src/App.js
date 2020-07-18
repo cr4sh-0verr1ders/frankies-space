@@ -86,7 +86,7 @@ class App extends Component {
     };
 
     let otherAvatars = others.map(user => {
-      return <Avatar user={user} />;
+      return <Avatar key={user.id} user={user} />;
     });
 
     return (

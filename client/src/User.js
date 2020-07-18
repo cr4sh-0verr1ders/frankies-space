@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import defaultIcon from './default-icon.svg';
 
 class User {
@@ -7,6 +7,7 @@ class User {
     this.y = y;
     this.name = "Luke Fisk-Lennon";
     this.icon = defaultIcon;
+    this.id = Math.floor(Math.random() * 10000);
   }
 
   step(dx, dy) {
