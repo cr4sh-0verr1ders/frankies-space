@@ -29,7 +29,7 @@ html, body, #root, .App {
   font-size: 20px;
   text-align: center;
 
-  left: calc(0px - calc(var(--origin-x) * 1px) - var(--size)/2);
+  left: calc(0% - calc(var(--origin-x) * 1px) - var(--size)/2);
   top: calc(50% - calc(var(--origin-y) * 1px) - var(--size)/2);
   transform: translate(calc(var(--user-x) * 1px), calc(var(--user-y) * 1px));
   transition-property: transform;
@@ -66,6 +66,7 @@ html, body, #root, .App {
   text-align: left;
   transition: 0.3s;
   transform-origin: 0% 100%;
+  border-radius: 23px;
 }
 
 .Geofence {
