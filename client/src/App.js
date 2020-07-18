@@ -19,7 +19,7 @@ class App extends Component {
     super();
 
     this.state = {
-      authed: false,
+      isAuthed: false,
       self: new User(),
       move: {
         up: false,
@@ -44,6 +44,16 @@ class App extends Component {
       this.setState({
         ...this.state,
         others: users,
+      });
+    });
+
+    socket.on("identified", identity => {
+      let self = this.state.self;
+      self.name = identity.name;
+      self.icon = identity.uri;
+      this.setState({
+        ...this.state,
+        self,
       });
     });
   }
@@ -96,7 +106,7 @@ class App extends Component {
   handleIsAuthed(isAuthed) {
     this.setState({
       ...this.state,
-      isAuthed
+      isAuthed,
     });
   }
 

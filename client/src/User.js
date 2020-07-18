@@ -8,7 +8,7 @@ const defaultUserData = {
   y: 2500,
   name: "Placeholder",
   message: "",
-  icon: defaultIcon,
+  image_uri: defaultIcon,
   id: "",
 }
 
@@ -24,7 +24,7 @@ class User {
     this.y = data.y;
     this.message = data.message;
     this.name = data.name;
-    this.icon = defaultIcon;
+    this.icon = data.image_uri;
     this.id = data.socket_id;
   }
 
@@ -73,7 +73,7 @@ function Avatar(props) {
       <div
         className="name"
       >
-        {user.x}, {user.y}
+        {user.name}
       </div>
       <div
         className="message acrylic"
