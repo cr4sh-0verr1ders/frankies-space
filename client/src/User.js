@@ -15,10 +15,23 @@ class User {
   constructor(data = defaultUserData) {
     this.x = data.x;
     this.y = data.y;
-    this.message = "";
+    this.message = "msg";
     this.name = data.name;
     this.icon = defaultIcon;
     this.id = data.socket_id;
+  }
+
+  public() {
+    return {
+      x: this.x,
+      y: this.y,
+      name: this.name,
+      id: this.socket_id,
+    }
+  }
+
+  clone() {
+    return new User(this.public());
   }
 
   step(dx, dy) {
@@ -33,6 +46,13 @@ class User {
       this.y += dy;
     }
     return this;
+  }
+
+  withMessage(msg) {
+    let newThis = this.clone();
+    newThis.message = msg;
+    console.log("Setting message", msg, this, newThis);
+    return newThis;
   }
 
   setId(id) {

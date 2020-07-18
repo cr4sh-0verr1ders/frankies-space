@@ -33,12 +33,28 @@ class App extends Component {
     this.handleKeyDown = this.handleKeyDown.bind(this);
     this.handleKeyUp = this.handleKeyUp.bind(this);
 
-    socket.on("connection", () => {
+    socket.on("connect", () => {
       this.state.self.id = socket.id;
     });
 
     socket.on("message", (data) => {
-      this.state.self.message = data.msg;
+      // Find relevant user
+      if(data.sender === this.state.self.id) {
+        this.setState({
+          ...this.state,
+          self: this.state.self.withMessage(data.msg),
+        });
+      } else {
+        let index = this.state.others.findIndex(user => user.id === data.sender);
+        if(index < 0) return;
+
+        let newOthers = this.state.others.slice();
+        newOthers[index] = newOthers[index].withMessage(data.msg);
+        this.setState({
+          ...this.state,
+          other: newOthers,
+        });
+      }
     })
 
     socket.on("update", userStates => {
@@ -50,7 +66,7 @@ class App extends Component {
         others: users,
       });
     });
-}
+  }
 
   componentDidMount() {
     this.tickerID = setInterval(() => this.tick(), 10);
@@ -98,7 +114,10 @@ class App extends Component {
   }
 
   handleIsAuthed(isAuthed) {
-    this.setState({isAuthed})
+    this.setState({
+      ...this.state,
+      isAuthed
+    });
   }
 
   render() {
