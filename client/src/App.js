@@ -6,7 +6,7 @@ import MessageBox from './MessageBox';
 import Login from './Login';
 import socket from './socket';
 
-const SPEED = 0.7;
+const SPEED = 0.5;
 
 function Map() {
   return (
@@ -49,6 +49,9 @@ class App extends Component {
 
     this.handleKeyDown = this.handleKeyDown.bind(this);
     this.handleKeyUp = this.handleKeyUp.bind(this);
+
+    window.onkeydown = this.handleKeyDown
+    window.onkeyup = this.handleKeyUp
 
     socket.on("connect", () => {
       this.state.self.id = socket.id;
@@ -180,8 +183,8 @@ class App extends Component {
       <div
         className="App"
         tabIndex="0" // Necessary to accept input
-        onKeyDown={this.handleKeyDown}
-        onKeyUp={this.handleKeyUp}
+        // onKeyDown={this.handleKeyDown}
+        // onKeyUp={this.handleKeyUp}
         style={cssPosition}
       >
         <Map />
