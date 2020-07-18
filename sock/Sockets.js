@@ -31,6 +31,9 @@ function setupConnection(io, socket) {
     console.log("Identification event");
     // grab the facebook auth token and get a name and image uri
     facebook.identify(token,function(identity){
+        let index = users.findIndex(user => user.socket.id === socket.id); 
+        users[index].name = identity.name;
+        users[index].image_uri = identity.uri;
         console.log(identity);
     });
 
