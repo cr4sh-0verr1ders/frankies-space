@@ -1,2 +1,2 @@
-const socket = window.io(":8080", {transports: ['websocket']});
+const socket = window.io();
 export default socket;
