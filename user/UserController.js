@@ -30,7 +30,7 @@ function verifyToken(req, res, next) {
 router.post('/register', function(req, res){
     // Hash the password. Can't be unencrypted. 
     const hashedPassword = bcrypt.hashSync(req.body.password, 10);
-
+    //User.findOne({email: req.body.email})
     User.create({
         name: req.body.name,
         email: req.body.email,
