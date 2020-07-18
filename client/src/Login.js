@@ -1,16 +1,19 @@
 import React, { useEffect } from 'react'
+import socket from "./socket"
 
-function Login() {
-    const updateStatus = () => {
+function Login({ setIsAuthed }) {
+    window.updateStatus = () => {
         try {
             window.FB.getLoginStatus(function(response) {
-                // {authResponse: null, status: "not_authorized"}
-                console.log(response)
+                setIsAuthed(response.authResponse != null)
+                if (response.authResponse) {
+                    socket.emit("identify", response.authResponse.accessToken);
+                }
             })
         } catch(e) {}
     }
 
-    useEffect(updateStatus, [])
+    useEffect(window.updateStatus, [])
 
     return (
         <div className="loginModal acrylic">

@@ -18,6 +18,7 @@ class App extends Component {
     super();
 
     this.state = {
+      authed: false,
       self: new User(3000, 2500),
       move: {
         up: false,
@@ -79,6 +80,10 @@ class App extends Component {
     if(key === 'd') this.setMove({ right: false });
   }
 
+  handleIsAuthed(isAuthed) {
+    this.setState({isAuthed})
+  }
+
   render() {
     const { self, others } = this.state;
     const cssPosition = {
@@ -100,9 +105,9 @@ class App extends Component {
       >
         <Map />
         {otherAvatars}
-        <Avatar user={self} />
-        <MessageBox />
-        <Login />
+        {this.state.isAuthed && <Avatar user={self} />}
+        {this.state.isAuthed && <MessageBox />}
+        {!this.state.isAuthed && <Login setIsAuthed={(this.handleIsAuthed).bind(this)} />}
       </div>
     );
   }
