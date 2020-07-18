@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import logo from './map.jpg';
 import './App.css';
 import { User } from './User';
+import MessageBox from './MessageBox';
 
 const SPEED = 3;
 
@@ -88,6 +89,7 @@ class App extends Component {
         onKeyUp={this.handleKeyUp}
       >
         <Map x={self.x} y={self.y} />
+        <MessageBox />
       </div>
     );
   }

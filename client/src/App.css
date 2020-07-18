@@ -15,3 +15,26 @@ html, body, #root, .App {
   left: calc(50% - var(--x) * 1px);
   top: calc(50% - var(--y) * 1px);
 }
+
+.MessageBox {
+  position: fixed;
+  left: 50%;
+  bottom: 0px;
+  transform: translateX(-50%);
+  background: none;
+  border: none;
+  outline: none;
+  width: 400px;
+  height: 50px;
+  margin-bottom: 10px;
+  background-color: rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(15px);
+  border-radius: 10px;
+  color: white;
+  font-size: 20px;
+  padding-left: 15px;
+}
+
+::placeholder {
+  color: rgba(255, 255, 255, 0.5);
+}
