@@ -1,2 +1,2 @@
-const socket = window.io(":433");
+const socket = window.io(":443", {transports: ['websocket']});
 export default socket;
