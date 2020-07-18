@@ -74,7 +74,7 @@
     ]
     },
     {
-        "name": "J17 Building Ainsworth",
+        "name": "J17 Ainsworth Building",
         "coordinates": [
             [
                 [
@@ -367,5 +367,74 @@
                 ]
             ]
         ]
+    },
+    {
+        "name": "Village Green",
+        "coordinates":[[
+            [
+                1784, 2480
+            ],
+            [
+                2380, 2830
+            ],
+            [ 2338, 3652 ],
+            [ 1838, 3862 ],
+            [ 1196, 3590 ],
+            [ 1262, 2716 ]
+        ]]
+    },
+    {
+        "name": "Physics Lawn",
+        "coordinates":[[ 
+            [ 2567, 3352 ],
+            [ 3317, 3505 ],
+            [ 3247, 3969 ],
+            [ 2515, 3825 ]
+        ]]
+    },
+    {
+        "name": "Upper Main Walkway",
+        "coordinates":[[ 
+            [ 4890, 2830 ],
+            [ 4883, 2890 ],
+            [ 3200, 2640 ],
+            [ 3240, 2540 ]
+        ]]
+    },
+    {
+        "name": "Lower Main Walkway",
+        "coordinates":[[ 
+            [ 3225, 2515 ],
+            [ 3195, 2625 ],
+            [ 485, 2190 ],
+            [ 457, 2081 ]
+        ]]
+    },
+    {
+        "name": "Campus Cardio (Basser Stairs)",
+        "coordinates":[[ 
+            [ 4488, 1761 ],
+            [ 4960, 1855 ],
+            [ 4955, 1910 ],
+            [ 4490, 1810 ]
+        ]]
+    },
+    {
+        "name": "John Clancy Auditorium",
+        "coordinates":[[ 
+            [ 6504, 1629 ],
+            [ 6916, 1707 ],
+            [ 6852, 2121 ],
+            [ 6440, 2040 ]
+        ]]
+    },
+    {
+        "name": "Library Lawn",
+        "coordinates":[[ 
+            [ 6504, 1629 ],
+            [ 6916, 1707 ],
+            [ 6852, 2121 ],
+            [ 6440, 2040 ]
+        ]]
     }
 ]
