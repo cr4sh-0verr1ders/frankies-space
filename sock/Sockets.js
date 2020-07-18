@@ -78,7 +78,7 @@ function setupConnection(io, socket) {
     user.messageTimeout = setTimeout(() => {
       user.message = "";
       socket.emit("clearmessage");
-    }, messageTimeout);
+    }, messageTimeout + 50 * msg.length);
   });
 }
 
