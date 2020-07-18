@@ -20,11 +20,33 @@ class App extends Component {
 
     this.state = {
       self: new User(),
+      move: {
+        up: false,
+        left: false,
+        down: false,
+        right: false,
+      }
     }
+  }
+
+  componentDidMount() {
+    this.tickerID = setInterval(() => this.tick(), 25);
+  }
+
+  tick() {
+    const { self, move } = this.state;
+    this.setState({
+      self: self.step(move.right - move.left, move.down - move.up),
+    });
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.tickerID);
   }
 
   render() {
     const self = this.state.self;
+    console.log(self);
     return (
       <div className="App">
         <Map x={self.x} y={self.y} />

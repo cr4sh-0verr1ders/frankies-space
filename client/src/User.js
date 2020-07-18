@@ -1,11 +1,11 @@
 class User {
-  constructor() {
-    this.setXY(0, 0);
+  constructor(x = 0, y = 0) {
+    this.x = x;
+    this.y = y;
   }
 
-  setXY(newX, newY) {
-    this.x = newX;
-    this.y = newY;
+  step(dx, dy) {
+    return new User(this.x + dx, this.y + dy);
   }
 }
 
