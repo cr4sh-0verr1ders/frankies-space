@@ -24,6 +24,10 @@ function MessageBox(props) {
       element.current.blur()
     }
 
+    if (event.key === "Escape") {
+      element.current.blur()
+    }
+
     event.stopPropagation(); // don't trigger movement
   }
 
