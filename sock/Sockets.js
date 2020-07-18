@@ -23,7 +23,6 @@ function setupConnection(io, socket) {
 
   // print socket id
   console.log(`New connection: ${socket.id}`);
-  facebook.identify("2693873687550953|9M8I5tk0Rhrj3UgfN7kQyzNTVog");
   // we push the user onto the stack with placeholder name and image uri, awaiting identification event
   users.push(new User(socket, socket.id, "/"));
 
@@ -31,7 +30,9 @@ function setupConnection(io, socket) {
   socket.on("identify", (token) => {
     console.log("Identification event");
     // grab the facebook auth token and get a name and image uri
-    facebook.identify(token);
+    facebook.identify(token,function(identity){
+        console.log(identity);
+    });
 
   });
 
@@ -64,11 +65,11 @@ function setupConnection(io, socket) {
 }
 
 exports = module.exports = function(io){
-  // handle connection and setup other listeners
-  io.on("connection", socket => setupConnection(io, socket));
+    // handle connection and setup other listeners
+    io.on("connection", socket => setupConnection(io, socket));
 
-  // Polling
-  setInterval(() => {
-    io.emit("update", users.map(user => user.public()));
-  }, updateInterval);
+    // Polling
+    setInterval(() => {
+        io.emit("update", users.map(user => user.public()));
+    }, updateInterval);
 }

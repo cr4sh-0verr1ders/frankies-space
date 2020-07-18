@@ -1,17 +1,38 @@
-const FB = require("fb").default;
-FB.setAccessToken("2693873687550953|9M8I5tk0Rhrj3UgfN7kQyzNTVog");
+const FB = require("fb").default; 
 
-exports.identify = function identify(token){
-  FB.api(
-    `/debug_token?input_token=${token}`,
-    function(response){
-      if(response && !response.error){
-        console.log(response);
-        return response;
-      }
-    }
-  );
-  return null;
+exports.identify = function identify(token, callback){ 
+        let name,id,uri;
+        
+        FB.setAccessToken(token); // race condition shouldnt be a problem..  
+        FB.api(
+            "/me",
+            {fields: ["id","name"]},
+            function(response){
+                if(!response || response.error){
+                    console.log(!response ? "Error": response.error);
+                    return null;
+                }
+                console.log(response);
+                name = response.name; 
+                id = response.id;
+                uri = `https://graph.facebook.com/${id}/picture`
+        
+                callback({uri:uri, name:name});
+            }
+        );
+        
+        //FB.api(
+        //    `${id}/picture`,
+        //    {},
+        //    function(response){
+        //        if(!response || response.error){
+        //            console.log(!response ? "Error": response.error);
+        //        }
+        //        console.log(response);
+        //        //uri = response.name; 
+        //    }
+        //);
+
 }
 
 exports.debug = function debug(){
