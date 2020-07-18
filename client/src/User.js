@@ -50,6 +50,10 @@ function Avatar(props) {
       </div>
       <div
         className="message acrylic"
+        style={{
+          opacity: user.message.length > 0 ? 1 : 0,
+          transform: `scale(${user.message.length > 0 ? 1 : 0})`
+        }}
       >
         {user.message}
       </div>

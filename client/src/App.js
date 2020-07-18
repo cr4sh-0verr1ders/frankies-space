@@ -39,6 +39,10 @@ class App extends Component {
     socket.on("message", (data) => {
       this.state.self.message = data.msg
     })
+
+    socket.on("update", data => {
+      // console.log(data)
+    })
   }
 
   componentDidMount() {

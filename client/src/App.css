@@ -60,6 +60,8 @@ html, body, #root, .App {
   bottom: 0px;
   margin-left: 7px;
   text-align: left;
+  transition: 0.3s;
+  transform-origin: 0% 100%;
 }
 
 .acrylic {
