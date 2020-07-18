@@ -56,6 +56,15 @@ class App extends Component {
         self,
       });
     });
+
+    socket.on("clearmessage", () => {
+      let { self } = this.state;
+      self.message = "";
+      this.setState({
+        ...this.state,
+        self,
+      });
+    });
   }
 
   componentDidMount() {
