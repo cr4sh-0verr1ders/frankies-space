@@ -44,8 +44,9 @@ function setupConnection(io, socket) {
         user.name = identity.name;
         user.image_uri = identity.uri;
         console.log(identity);
-    });
 
+        socket.emit("identified", identity);
+    });
   });
 
   // we want to handle disconnect events before the socket object is sent to the shadow realm
