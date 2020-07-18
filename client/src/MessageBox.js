@@ -5,14 +5,23 @@ function MessageBox(props) {
   const element = useRef();
 
   useEffect(() => {
-    element.current.focus()
+    // element.current.focus()
+    window.onkeydown = event => {
+      if (event.key === "Enter") {
+        element.current.focus()
+      }
+    }
   }, [])
 
   const onKeyDown = event => {
     if (event.key === "Enter") {
-      socket.emit("message", event.target.value)
-      props.onMessage(event.target.value)
-      event.target.value = ""
+      if (event.target.value.length > 0) {
+        socket.emit("message", event.target.value)
+        props.onMessage(event.target.value)
+        event.target.value = ""
+        event.target.placeholder = "Press enter to focus"
+        element.current.blur()
+      }
     }
 
     event.stopPropagation(); // don't trigger movement

@@ -3,15 +3,19 @@ import socket from "./socket"
 
 function Login({ setIsAuthed }) {
     window.updateStatus = () => {
-        try {
-            window.FB.getLoginStatus(function(response) {
-                setIsAuthed(response.authResponse != null)
-                if (response.authResponse) {
-                    // console.log(response.authResponse.accessToken)
-                    socket.emit("identify", response.authResponse.accessToken);
-                }
-            })
-        } catch(e) {}
+        if (window.location.hostname == "localhost") {
+            setIsAuthed(true)
+        } else {
+            try {
+                window.FB.getLoginStatus(function(response) {
+                    setIsAuthed(response.authResponse != null)
+                    if (response.authResponse) {
+                        // console.log(response.authResponse.accessToken)
+                        socket.emit("identify", response.authResponse.accessToken);
+                    }
+                })
+            } catch(e) {}
+        }
     }
 
     useEffect(window.updateStatus, [])
