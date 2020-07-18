@@ -7,6 +7,7 @@ import Login from './Login';
 import socket from './socket';
 
 const SPEED = 0.5;
+const SPRINT = 0.8;
 
 function Map() {
   return (
@@ -43,6 +44,7 @@ class App extends Component {
         left: false,
         down: false,
         right: false,
+        sprint: false,
       },
       others: []
     }
@@ -106,10 +108,11 @@ class App extends Component {
     this.timestamp = timestamp;
 
     const { self, move } = this.state;
+    let speed = move.sprint ? SPRINT : SPEED;
     this.setState({
       self: self.step(
-        delta * SPEED * (move.right - move.left),
-        delta * SPEED * (move.down - move.up)
+        delta * speed * (move.right - move.left),
+        delta * speed * (move.down - move.up)
       ),
     });
 
@@ -136,6 +139,7 @@ class App extends Component {
     if(key === 'a') this.setMove({ left: true });
     if(key === 's') this.setMove({ down: true });
     if(key === 'd') this.setMove({ right: true });
+    if(key === 'shift') this.setMove({ sprint: true });
   }
 
   handleKeyUp(event) {
@@ -144,6 +148,7 @@ class App extends Component {
     if(key === 'a') this.setMove({ left: false });
     if(key === 's') this.setMove({ down: false });
     if(key === 'd') this.setMove({ right: false });
+    if(key === 'shift') this.setMove({ sprint: false });
   }
 
   handleIsAuthed(isAuthed) {
