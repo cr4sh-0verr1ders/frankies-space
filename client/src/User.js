@@ -13,7 +13,13 @@ const defaultUserData = {
 }
 
 class User {
-  constructor(data = defaultUserData) {
+  constructor(data) {
+    if (!data) {
+      data = defaultUserData
+      this.self = true
+    } else {
+      this.self = false
+    }
     this.x = data.x;
     this.y = data.y;
     this.message = data.message;
@@ -49,15 +55,16 @@ class User {
 
 function Avatar(props) {
   const { user } = props;
-  const cssPosition = {
+  const style = {
     "--user-x": user.x,
-    "--user-y": user.y,
+    "--user-y": user.y
   };
+  if (user.self) style.transition = "none"
 
   return (
     <div
       className="user"
-      style={cssPosition}
+      style={style}
     >
       <img
         className="avatar"

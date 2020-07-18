@@ -81,6 +81,6 @@ exports = module.exports = function(io){
     // Polling
     setInterval(() => {
         io.emit("update", users.map(user => user.public()));
-        console.log(users); 
+        // console.log(users); 
     }, updateInterval);
 }
