@@ -6,7 +6,7 @@ import MessageBox from './MessageBox';
 import Login from './Login';
 import socket from './socket';
 
-const SPEED = 3;
+const SPEED = 5;
 
 function Map() {
   return (
@@ -59,7 +59,7 @@ class App extends Component {
   }
 
   componentDidMount() {
-    this.tickerID = setInterval(() => this.tick(), 10);
+    requestAnimationFrame((this.tick).bind(this))
   }
 
   tick() {
@@ -71,11 +71,12 @@ class App extends Component {
       ),
     });
     socket.emit("position", {x: self.x, y: self.y});
+    requestAnimationFrame((this.tick).bind(this))
   }
 
-  componentWillUnmount() {
-    clearInterval(this.tickerID);
-  }
+  // componentWillUnmount() {
+  //   clearInterval(this.tickerID);
+  // }
 
   setMove(newMove) {
     this.setState({
