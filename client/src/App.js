@@ -6,7 +6,7 @@ import MessageBox from './MessageBox';
 import Login from './Login';
 import socket from './socket';
 
-const SPEED = 0.7;
+const SPEED = 0.5;
 
 function Map() {
   return (
