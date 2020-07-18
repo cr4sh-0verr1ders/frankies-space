@@ -15,10 +15,10 @@ mongoose.connect(databaseURL, function(err, db){
         console.log("Established a connection to the database")
     }
 })
-app.use(express.static(path.join(__dirname,'test-react-app', "build")))
+app.use(express.static(path.join(__dirname,'client', "build")))
 app.use("/api/auth", UserController);
 app.get('*', (req,res) =>{
-    res.sendFile(path.join(path.join(__dirname,"test-react-app", "build","index.html")));
+    res.sendFile(path.join(path.join(__dirname,"client", "build","index.html")));
 });
 //router.get('/', (req, res) => res.sendFile(path.join(__dirname,"test-react-app", "public","index.html")))
 //app.use('/', router);
