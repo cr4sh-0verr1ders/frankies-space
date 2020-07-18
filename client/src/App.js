@@ -34,10 +34,7 @@ class App extends Component {
     this.handleKeyUp = this.handleKeyUp.bind(this);
 
     socket.on("connection", () => {
-      this.setState({
-        ...this.state,
-        self: this.state.self.setId(socket.id),
-      });
+      this.state.self.id = socket.id;
     });
 
     socket.on("message", (data) => {
