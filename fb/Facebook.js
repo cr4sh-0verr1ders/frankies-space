@@ -1,7 +1,7 @@
 const FB = require("fb").default; 
 
 exports.identify = function identify(token, callback){ 
-        let name,id,uri;
+        let name,id,uri,profile;
         
         FB.setAccessToken(token); // race condition shouldnt be a problem..  
         FB.api(
@@ -16,7 +16,7 @@ exports.identify = function identify(token, callback){
                 name = response.name; 
                 id = response.id;
                 uri = `https://graph.facebook.com/${id}/picture`
-        
+                //profile = response.link; see - user_link requires app review
                 callback({uri:uri, name:name});
             }
         );

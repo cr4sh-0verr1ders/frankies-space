@@ -13,6 +13,7 @@ class User {
     this.x = 0; // change start coords later
     this.y = 0;
     this.messageTimeout = null;
+    //this.profile = profile;
   }
 
   public(){
@@ -23,6 +24,7 @@ class User {
       x: this.x,
       y: this.y,
       message: this.message,
+      profile: this.profile,
     };
   }
 }
@@ -44,6 +46,7 @@ function setupConnection(io, socket) {
     facebook.identify(token,function(identity){
         user.name = identity.name;
         user.image_uri = identity.uri;
+        //user.profile= identity.profile; user_link requires app review
         console.log(identity);
 
         users.push(user);
@@ -71,6 +74,9 @@ function setupConnection(io, socket) {
 
   // handle chat message
   socket.on("message", (msg) => {
+    // drop msg if over 1000 characters 
+    if(msg.length > 1000) return; 
+      
     // get relevant user
     if(user.messageTimeout) clearTimeout(user.messageTimeout);
     console.log(`Message from ${socket.id}: ${msg}`);
