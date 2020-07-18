@@ -22,7 +22,7 @@ function Login({ setIsAuthed }) {
 
     return (
         <div className="loginModal acrylic">
-            <h1><del>u</del>nsw.io</h1>
+            <h1>Frankie's Space</h1>
             <div className="fb-login-button" data-size="large" data-button-type="continue_with" data-layout="rounded" data-auto-logout-link="false" data-use-continue-as="true" data-width="" data-onlogin="updateStatus"></div>
         </div>
     );
