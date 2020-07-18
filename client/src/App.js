@@ -69,6 +69,9 @@ class App extends Component {
 
   componentDidMount() {
     requestAnimationFrame((this.tick).bind(this))
+    setInterval(() => {
+      socket.emit("position", {x: this.state.self.x, y: this.state.self.y});
+    }, 100);
   }
 
   tick() {
@@ -79,7 +82,7 @@ class App extends Component {
         SPEED * (move.down - move.up)
       ),
     });
-    socket.emit("position", {x: self.x, y: self.y});
+    
     requestAnimationFrame((this.tick).bind(this))
   }
 

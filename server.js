@@ -9,6 +9,7 @@ const UserController = require("./user/UserController");
 // yay sockets
 const http = require("http").createServer(app); 
 const io = require("socket.io")(http);
+io.set('transports', ['websocket']);
 // sockets export 
 const sock = require("./sock/Sockets")(io); 
 const databaseURL = "mongodb+srv://dbUser:dbpassword@main-db.oblp1.mongodb.net/testdb?retryWrites=true&w=majority"

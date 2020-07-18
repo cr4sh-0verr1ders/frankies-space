@@ -7,7 +7,7 @@ function Login({ setIsAuthed }) {
             window.FB.getLoginStatus(function(response) {
                 setIsAuthed(response.authResponse != null)
                 if (response.authResponse) {
-                    console.log(response.authResponse.accessToken)
+                    // console.log(response.authResponse.accessToken)
                     socket.emit("identify", response.authResponse.accessToken);
                 }
             })
