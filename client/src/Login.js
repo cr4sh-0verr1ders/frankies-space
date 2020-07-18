@@ -2,10 +2,12 @@ import React, { useEffect } from 'react'
 
 function Login() {
     const updateStatus = () => {
-        window.FB.getLoginStatus(function(response) {
-            // {authResponse: null, status: "not_authorized"}
-            console.log(response)
-        })
+        try {
+            window.FB.getLoginStatus(function(response) {
+                // {authResponse: null, status: "not_authorized"}
+                console.log(response)
+            })
+        } catch(e) {}
     }
 
     useEffect(updateStatus, [])
