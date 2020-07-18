@@ -22,6 +22,8 @@ class User {
     }
     this.x = data.x;
     this.y = data.y;
+    this.location = "";
+    this.locationID = -1; // initially start outside.
     this.message = data.message;
     this.name = data.name;
     this.icon = data.image_uri;
@@ -30,11 +32,16 @@ class User {
 
   step(dx, dy) {
     if (dx < 0 || dx > 0 || dy > 0 || dy < 0) {
-      for(let i = 0; i < locationData.length; i++){
-        if (classifyPoint(locationData[i].coordinates[0], [this.x, this.y]) === -1) {
-          this.location = locationData[i].name;
-          console.log("You're inside " + locationData[i].name);
-          break;
+      // If not in current geo-fence.
+      if (this.locationID == -1 || classifyPoint(locationData[this.locationID].coordinates[0], [this.x, this.y] == 1)) {
+        // Find where the player is.
+        for(let i = 0; i < locationData.length; i++){
+          if (classifyPoint(locationData[i].coordinates[0], [this.x, this.y]) === -1) {
+            this.location = locationData[i].name;
+            this.locationID = i;
+            console.log("You're inside " + locationData[i].name);
+            break;
+          }
         }
       }
       this.x += dx;
