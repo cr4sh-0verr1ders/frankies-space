@@ -1,0 +1,18 @@
+J12 Newton {
+    point1: 2790, 2584
+    point2: 2709, 3298
+    point3: 2883, 3316
+    point4: 2985, 2605
+},
+K15 Old Main Building {
+    point1: 2877, 3322,
+    point2: 2907, 3172,
+    point3: 2952, 2845,
+    point4: 3066, 2860, 
+    point5: 3006, 3214,
+    point6: 3048, 3190,
+    point7: 4002, 3364,
+    point8: 3975, 3538,
+    point9: 2823, 3322,
+    point10: 2832, 3187,]
+}
