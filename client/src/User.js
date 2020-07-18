@@ -5,6 +5,7 @@ class User {
   constructor(x = 0, y = 0) {
     this.x = x;
     this.y = y;
+    this.message = "";
     this.name = "Luke Fisk-Lennon";
     this.icon = defaultIcon;
     this.id = Math.floor(Math.random() * 10000);
@@ -37,6 +38,11 @@ function Avatar(props) {
         className="name"
       >
         {user.x}, {user.y}
+      </div>
+      <div
+        className="message acrylic"
+      >
+        {user.message}
       </div>
     </div>
   );

@@ -23,9 +23,12 @@ html, body, #root, .App {
 
 .user {
   --size: 50px;
-  width: var(--size);
+  width: 50%;
   height: var(--size);
   position: absolute;
+  font-size: 20px;
+  text-align: center;
+  transform: translateX(-50%);
   left: calc(50% + (var(--user-x) - var(--origin-x)) * 1px - var(--size)/2);
   top: calc(50% + (var(--user-y) - var(--origin-y)) * 1px - var(--size)/2);
 }
@@ -47,6 +50,16 @@ html, body, #root, .App {
 
   color: white;
   text-shadow: 0 0 2px black;
+}
+
+.message {
+  color: white;
+  padding: 10px;
+  position: absolute;
+  left: calc(50% + var(--size) / 2);
+  bottom: 0px;
+  margin-left: 7px;
+  text-align: left;
 }
 
 .acrylic {
@@ -77,7 +90,7 @@ html, body, #root, .App {
 .loginModal {
   position: fixed;
   left: 50%;
-  top: 30%;
+  top: 50%;
   transform: translate(-50%, -50%);
   padding: 50px;
   backdrop-filter: blur(30px);

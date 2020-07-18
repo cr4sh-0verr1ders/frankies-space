@@ -4,6 +4,7 @@ import './App.css';
 import { User, Avatar } from './User';
 import MessageBox from './MessageBox';
 import Login from './Login';
+import socket from './socket';
 
 const SPEED = 3;
 
@@ -34,6 +35,10 @@ class App extends Component {
 
     this.handleKeyDown = this.handleKeyDown.bind(this);
     this.handleKeyUp = this.handleKeyUp.bind(this);
+
+    socket.on("message", (data) => {
+      this.state.self.message = data.msg
+    })
   }
 
   componentDidMount() {
