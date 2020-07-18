@@ -17,7 +17,7 @@ class User {
   }
 }
 
-function setupConnection(socket) {
+function setupConnection(io, socket) {
   // broadcast new connection to other clients
   // by default, set their name to their socket id
 
@@ -64,9 +64,8 @@ function setupConnection(socket) {
 }
 
 exports = module.exports = function(io){
-
   // handle connection and setup other listeners
-  io.on("connection", setupConnection);
+  io.on("connection", socket => setupConnection(io, socket));
 
   // Polling
   setInterval(() => {
