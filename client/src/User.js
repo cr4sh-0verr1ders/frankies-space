@@ -9,6 +9,7 @@ class User {
     this.message = "";
     this.name = "Luke Fisk-Lennon";
     this.icon = defaultIcon;
+    this.location = "UNSW"
     this.id = Math.floor(Math.random() * 10000);
   }
 
@@ -16,6 +17,7 @@ class User {
     if (dx < 0 || dx > 0 || dy > 0 || dy < 0) {
       for(let i = 0; i < locationData.length; i++){
         if (classifyPoint(locationData[i].coordinates[0], [this.x, this.y]) === -1) {
+          this.location = locationData[i].name;
           console.log("You're inside " + locationData[i].name);
           break;
         }
