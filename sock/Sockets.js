@@ -41,6 +41,7 @@ class AI extends User {
       this.waypoints = waypoints; 
       this.currPos = 0;
       this.closeEnough = 10;
+      this.speed = 5;
     }
     runAI() {
       let pos = this.waypoints[this.currPos];
@@ -54,17 +55,20 @@ class AI extends User {
           this.currPos = 0;
         }
       } else {
-        this.x += (pos[0] - this.x)/10;
-        this.y += (pos[1] - this.y)/10;
+        this.x += (pos[0] - this.x)/12;
+        this.y += (pos[1] - this.y)/12;
       }
     }
 }
 
-let waypoints = [[3857,1796], [3805,2004], [4380,2121], [4406, 2030], [4170,1978], [4133,1908], [4247, 1755], [4091,1748]]
-const frankie = new AI(4010, 1882, "Frankie","https://unswio.herokuapp.com/frankie.png", waypoints);
+let frankieWaypoints = [[3857,1796], [3805,2004], [4380,2121], [4406, 2030], [4170,1978], [4133,1908], [4247, 1755], [4091,1748]]
+let clancyWaypoints = [[6576,1748], [6533, 2055], [6811, 2048], [6830,1785], [6700,1833]];
+
+const frankie = new AI(4010, 1882, "Frankie","https://unswio.herokuapp.com/frankie.png", frankieWaypoints);
+const clancy = new AI(6576,1748, "Clancy", "https://unswio.herokuapp.com/clancy.png", clancyWaypoints)
 users.push(frankie);
-console.log("Franky is ")
-console.log(frankie);
+users.push(clancy);
+
 function setupConnection(io, socket) {
   // broadcast new connection to other clients
   // by default, set their name to their socket id
@@ -136,6 +140,6 @@ exports = module.exports = function(io){
     }, updateInterval);
     setInterval(()=>{
       frankie.runAI();
-      console.log(frankie);
+      clancy.runAI();
     }, updateAI);
 }

@@ -27,6 +27,9 @@ app.use("/api/auth", UserController);
 app.get("/frankie", (req, res)=>{
     res.sendFile(path.join(__dirname, "resources", "frankie.png"));
 })
+app.get("/clancy", (req, res)=> {
+    res.sendFile(path.join(__dirname, "resources", "clancy.png"))
+})
 app.get('*', (req,res) =>{
     res.sendFile(path.join(path.join(__dirname,"client", "build","index.html")));
 });
