@@ -24,7 +24,7 @@ class User {
       x: this.x,
       y: this.y,
       message: this.message,
-      profile: this.profile,
+      //profile: this.profile,
     };
   }
 }
