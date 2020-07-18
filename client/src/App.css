@@ -17,21 +17,21 @@ html, body, #root, .App {
 
 .map {
   position: absolute;
-  left: calc(50% - var(--origin-x) * 1px);
-  top: calc(50% - var(--origin-y) * 1px);
+  left: calc(50% - var(--origin-x));
+  top: calc(50% - var(--origin-y));
 }
 
 .user {
   --size: 50px;
-  width: 100%;
+  width: var(--size);
   height: var(--size);
   position: absolute;
   font-size: 20px;
   text-align: center;
 
-  left: calc(0% - calc(var(--origin-x) * 1px) - var(--size)/2);
-  top: calc(50% - calc(var(--origin-y) * 1px) - var(--size)/2);
-  transform: translate(calc(var(--user-x) * 1px), calc(var(--user-y) * 1px));
+  left: calc(50% - var(--origin-x) - var(--size)/2);
+  top: calc(50% - var(--origin-y) - var(--size)/2);
+  transform: translate(var(--user-x), var(--user-y));
   transition-property: transform;
   transition-duration: 100ms;
   transition-timing-function: linear;

@@ -151,8 +151,8 @@ class App extends Component {
   render() {
     const { self, others } = this.state;
     const cssPosition = {
-      "--origin-x": self.x,
-      "--origin-y": self.y,
+      "--origin-x": self.x + "px",
+      "--origin-y": self.y + "px",
     };
 
     let otherAvatars = others.map(user => {
