@@ -12,6 +12,8 @@ const defaultUserData = {
   id: "",
 }
 
+const diagonalFactor = Math.sqrt(0.5)
+
 class User {
   constructor(data) {
     if (!data) {
@@ -44,8 +46,12 @@ class User {
           }
         }
       }
-      this.x += dx;
-      this.y += dy;
+      if ((dx > 0 || dx < 0) && (dy > 0 || dy < 0)) {
+        dx *= diagonalFactor;
+        dy *= diagonalFactor;
+      }
+      this.x += Math.round(dx);
+      this.y += Math.round(dy);
     }
     return this;
   }
