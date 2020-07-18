@@ -2,14 +2,23 @@ import React from 'react';
 import defaultIcon from './default-icon.svg';
 import locationData from "./locations.json";
 import classifyPoint from "robust-point-in-polygon";
+
+const defaultUserData = {
+  x: 3000,
+  y: 2500,
+  name: "Placeholder",
+  icon: defaultIcon,
+  id: "",
+}
+
 class User {
-  constructor(x = 0, y = 0) {
-    this.x = x;
-    this.y = y;
+  constructor(data = defaultUserData) {
+    this.x = data.x;
+    this.y = data.y;
     this.message = "";
-    this.name = "Luke Fisk-Lennon";
+    this.name = data.name;
     this.icon = defaultIcon;
-    this.id = Math.floor(Math.random() * 10000);
+    this.id = data.socket_id;
   }
 
   step(dx, dy) {
@@ -23,6 +32,11 @@ class User {
       this.x += dx;
       this.y += dy;
     }
+    return this;
+  }
+
+  setId(id) {
+    this.id = id;
     return this;
   }
 }

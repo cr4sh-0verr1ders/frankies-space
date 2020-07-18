@@ -20,30 +20,37 @@ class App extends Component {
 
     this.state = {
       authed: false,
-      self: new User(3000, 2500),
+      self: new User(),
       move: {
         up: false,
         left: false,
         down: false,
         right: false,
       },
-      others: [
-        new User(3000, 2500),
-        new User(3200, 2600),
-      ]
+      others: []
     }
 
     this.handleKeyDown = this.handleKeyDown.bind(this);
     this.handleKeyUp = this.handleKeyUp.bind(this);
 
+    socket.on("connection", () => {
+      this.state.self.id = socket.id;
+    });
+
     socket.on("message", (data) => {
-      this.state.self.message = data.msg
+      this.state.self.message = data.msg;
     })
 
-    socket.on("update", data => {
-      // console.log(data)
-    })
-  }
+    socket.on("update", userStates => {
+      let users = userStates
+        .map(user => new User(user))
+        .filter(user => user.id !== socket.id);
+      this.setState({
+        ...this.state,
+        others: users,
+      });
+    });
+}
 
   componentDidMount() {
     this.tickerID = setInterval(() => this.tick(), 10);
@@ -57,6 +64,7 @@ class App extends Component {
         SPEED * (move.down - move.up)
       ),
     });
+    socket.emit("position", {x: self.x, y: self.y});
   }
 
   componentWillUnmount() {
