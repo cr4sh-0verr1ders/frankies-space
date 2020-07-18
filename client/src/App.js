@@ -52,6 +52,7 @@ class App extends Component {
 
     socket.on("connect", () => {
       this.state.self.id = socket.id;
+      console.log("Connected to server, socket id", socket.id);
     });
 
     socket.on("update", userStates => {
