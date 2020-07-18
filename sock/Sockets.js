@@ -112,8 +112,8 @@ function setupConnection(io, socket) {
 
   // handle chat message
   socket.on("message", (msg) => {
-    // drop msg if over 1000 characters 
-    if(msg.length > 1000) return; 
+    // drop msg if over 400 characters 
+    if(msg.length > 400) return; 
       
     // get relevant user
     if(user.messageTimeout) clearTimeout(user.messageTimeout);
