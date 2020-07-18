@@ -6,7 +6,7 @@ import MessageBox from './MessageBox';
 import Login from './Login';
 import socket from './socket';
 
-const SPEED = 7;
+const SPEED = 0.7;
 
 function Map() {
   return (
@@ -95,15 +95,24 @@ class App extends Component {
     }, 100);
   }
 
-  tick() {
+  tick(timestamp) {
+    if(this.timestamp === undefined) {
+      this.timestamp = timestamp;
+      requestAnimationFrame((this.tick).bind(this))
+      return;
+    }
+
+    let delta = timestamp - this.timestamp;
+    this.timestamp = timestamp;
+
     const { self, move } = this.state;
     this.setState({
       self: self.step(
-        SPEED * (move.right - move.left),
-        SPEED * (move.down - move.up)
+        delta * SPEED * (move.right - move.left),
+        delta * SPEED * (move.down - move.up)
       ),
     });
-    
+
     requestAnimationFrame((this.tick).bind(this))
   }
 

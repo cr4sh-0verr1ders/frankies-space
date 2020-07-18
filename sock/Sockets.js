@@ -33,7 +33,6 @@ function setupConnection(io, socket) {
 
   // we push the user onto the stack with placeholder name and image uri, awaiting identification event
   let user = new User(socket, socket.id, "/")
-  users.push(user);
 
   // print socket id
   console.log(`New connection: ${socket.id}`);
@@ -47,6 +46,7 @@ function setupConnection(io, socket) {
         user.image_uri = identity.uri;
         console.log(identity);
 
+        users.push(user);
         socket.emit("identified", identity);
     });
   });

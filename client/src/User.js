@@ -24,7 +24,7 @@ class User {
     }
     this.x = data.x;
     this.y = data.y;
-    this.location = "";
+    this.location = "WASD to move around";
     this.locationID = -1; // initially start outside.
     this.message = data.message;
     this.name = data.name;
@@ -82,10 +82,12 @@ function Avatar(props) {
       className="user"
       style={style}
     >
-      <img
-        className="avatar"
-        src={user.icon}
-      />
+      <a href="#">
+        <img
+          className="avatar"
+          src={user.icon}
+        />
+      </a>
       <div
         className="name"
       >
