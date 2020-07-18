@@ -89,13 +89,9 @@ class App extends Component {
         onKeyUp={this.handleKeyUp}
         style={cssPosition}
       >
-<<<<<<< HEAD
-        <Map x={self.x} y={self.y} />
-        <MessageBox />
-=======
         <Map />
         <Avatar user={self} />
->>>>>>> 2e9f0f4... Show user avatar
+        <MessageBox />
       </div>
     );
   }
