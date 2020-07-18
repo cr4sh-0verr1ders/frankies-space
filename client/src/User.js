@@ -1,6 +1,7 @@
 import React from 'react';
 import defaultIcon from './default-icon.svg';
-
+import locationData from "./locations.json";
+import classifyPoint from "robust-point-in-polygon";
 class User {
   constructor(x = 0, y = 0) {
     this.x = x;
@@ -11,8 +12,16 @@ class User {
   }
 
   step(dx, dy) {
-    this.x += dx;
-    this.y += dy;
+    if (dx < 0 || dx > 0 || dy > 0 || dy < 0) {
+      for(let i = 0; i < locationData.length; i++){
+        if (classifyPoint(locationData[i].coordinates[0], [this.x, this.y]) === -1) {
+          console.log("You're inside " + locationData[i].name);
+          break;
+        }
+      }
+      this.x += dx;
+      this.y += dy;
+    }
     return this;
   }
 }
