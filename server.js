@@ -4,7 +4,7 @@ var cors = require("cors");
 const path = require("path");
 const router = express.Router();
 const mongoose = require("mongoose");
-const port = 8080; // export in commandline.
+const port = process.env.PORT || 8080; // export in commandline.
 const UserController = require("./user/UserController");
 // yay sockets
 const http = require("http").createServer(app); 
