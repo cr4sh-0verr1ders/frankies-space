@@ -1,6 +1,7 @@
 const facebook = require("../fb/Facebook");
 
 const updateInterval = 100; // every 100 ms we poll to update user coords
+const messageTimeout = 5000; // How long to keep chat bubbles
 let users = [];
 
 class User {
@@ -11,6 +12,7 @@ class User {
     this.message = "";
     this.x = 0; // change start coords later
     this.y = 0;
+    this.messageTimeout = null;
   }
 
   public(){
@@ -70,8 +72,13 @@ function setupConnection(io, socket) {
   // handle chat message
   socket.on("message", (msg) => {
     // get relevant user
+    if(user.messageTimeout) clearTimeout(user.messageTimeout);
     console.log(`Message from ${socket.id}: ${msg}`);
     user.message = msg;
+    user.messageTimeout = setTimeout(() => {
+      user.message = "";
+      socket.emit("clearmessage");
+    }, messageTimeout);
   });
 }
 
