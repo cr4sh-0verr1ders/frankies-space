@@ -1,5 +1,8 @@
 const facebook = require("../fb/Facebook");
 
+const updateInterval = 100; // every 100 ms we poll to update user coords
+let users = [];
+
 class User {
   constructor(socket, name, image_uri){
     this.socket = socket;
@@ -57,8 +60,6 @@ function setupConnection(socket) {
 }
 
 exports = module.exports = function(io){
-  const updateInterval = 100; // every 100 ms we poll to update user coords
-  let users = [];
 
   // handle connection and setup other listeners
   io.on("connection", setupConnection);
