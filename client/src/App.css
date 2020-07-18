@@ -25,8 +25,8 @@ html, body, #root, .App {
   width: var(--size);
   height: var(--size);
   position: absolute;
-  left: calc(50% - (var(--user-x) - var(--origin-x)) * 1px - var(--size)/2);
-  top: calc(50% - (var(--user-y) - var(--origin-y)) * 1px - var(--size)/2);
+  left: calc(50% + (var(--user-x) - var(--origin-x)) * 1px - var(--size)/2);
+  top: calc(50% + (var(--user-y) - var(--origin-y)) * 1px - var(--size)/2);
 }
 
 .user .avatar {

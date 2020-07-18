@@ -23,7 +23,11 @@ class App extends Component {
         left: false,
         down: false,
         right: false,
-      }
+      },
+      others: [
+        new User(3000, 2500),
+        new User(3200, 2600),
+      ]
     }
 
     this.handleKeyDown = this.handleKeyDown.bind(this);
@@ -75,11 +79,15 @@ class App extends Component {
   }
 
   render() {
-    const self = this.state.self;
+    const { self, others } = this.state;
     const cssPosition = {
       "--origin-x": self.x,
       "--origin-y": self.y,
     };
+
+    let otherAvatars = others.map(user => {
+      return <Avatar user={user} />;
+    });
 
     return (
       <div
@@ -91,6 +99,7 @@ class App extends Component {
       >
         <Map />
         <Avatar user={self} />
+        {otherAvatars}
         <MessageBox />
       </div>
     );
