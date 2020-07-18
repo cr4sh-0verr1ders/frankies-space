@@ -3,6 +3,7 @@ import mapBackground from './map.jpg';
 import './App.css';
 import { User, Avatar } from './User';
 import MessageBox from './MessageBox';
+import Login from './Login';
 
 const SPEED = 3;
 
@@ -101,6 +102,7 @@ class App extends Component {
         {otherAvatars}
         <Avatar user={self} />
         <MessageBox />
+        <Login />
       </div>
     );
   }

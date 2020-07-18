@@ -20,7 +20,7 @@ function MessageBox() {
   return (
     <input
       ref={element}
-      className="MessageBox"
+      className="MessageBox acrylic"
       placeholder="Type a message"
       onKeyDown={onKeyDown}
     />
