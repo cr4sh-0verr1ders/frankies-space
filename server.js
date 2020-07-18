@@ -22,7 +22,11 @@ mongoose.connect(databaseURL, function(err, db){
     }
 })
 app.use(express.static(path.join(__dirname,'client', "build")))
+app.use(express.static(path.join(__dirname, 'resources')))
 app.use("/api/auth", UserController);
+app.get("/frankie", (req, res)=>{
+    res.sendFile(path.join(__dirname, "resources", "frankie.png"));
+})
 app.get('*', (req,res) =>{
     res.sendFile(path.join(path.join(__dirname,"client", "build","index.html")));
 });
