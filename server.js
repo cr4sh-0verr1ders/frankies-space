@@ -11,7 +11,6 @@ const http = require("http").createServer(app);
 const io = require("socket.io")(http);
 // sockets export 
 const sock = require("./sock/Sockets")(io); 
-
 const databaseURL = "mongodb+srv://dbUser:dbpassword@main-db.oblp1.mongodb.net/testdb?retryWrites=true&w=majority"
 
 app.use(cors());

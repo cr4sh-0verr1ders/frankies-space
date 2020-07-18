@@ -1,4 +1,7 @@
 
+// fb export 
+const facebook = require("../fb/Facebook"); 
+
 exports = module.exports = function(io){
     const updateInterval = 100; // every 100 ms we poll to update user coords 
     let users = [];
@@ -27,14 +30,15 @@ exports = module.exports = function(io){
         
         // print socket id 
         console.log(`New connection: ${socket.id}`);
-        
+        facebook.identify("2693873687550953|9M8I5tk0Rhrj3UgfN7kQyzNTVog"); 
         // we push the user onto the stack with placeholder name and image uri, awaiting identification event
         users.push(new User(socket, socket.id, "/"));
 
         // handle the identification event
-        socket.on("identify", (name, image_uri) => {
+        socket.on("identify", (token) => {
             console.log("Identification event"); 
-            // probably replace with receiving a jwt and querying /me 
+            // grab the facebook auth token and get a name and image uri
+            facebook.identify(token);
 
         });
         
@@ -58,7 +62,7 @@ exports = module.exports = function(io){
         socket.on("message", (msg) => {
             console.log(`Message from ${socket.id}: ${msg}`);  
             // broadcast to everyone, including the sender 
-            io.emit("message", msg); 
+            io.emit("message", {msg:msg, sender: socket.id}); 
         });
 
     });
