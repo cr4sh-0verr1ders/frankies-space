@@ -45,7 +45,7 @@ function setupConnection(io, socket) {
     let index = users.findIndex(o => o.socket.id == socket.id);
     // emit an event incase we want to do a disconnect animation or something
     io.emit("user_disconnect", {x: users[index].x, y: users[index].y});
-    console.log(`Socket ${socket.id} (name: ${users[index].name}) disconnected: ${reason}`);
+    //console.log(`Socket ${socket.id} (name: ${users[index].name}) disconnected: ${reason}`);
 
     // pop from stack
     users.splice(index, 1);
@@ -63,7 +63,7 @@ function setupConnection(io, socket) {
   socket.on("message", (msg) => {
     console.log(`Message from ${socket.id}: ${msg}`);
     // broadcast to everyone, including the sender
-    io.emit("message", {msg:msg, sender: socket.id});
+    io.emit("message_receive", {msg:msg, sender: socket.id});
   });
 }
 
@@ -74,5 +74,6 @@ exports = module.exports = function(io){
     // Polling
     setInterval(() => {
         io.emit("update", users.map(user => user.public()));
+        console.log(users); 
     }, updateInterval);
 }
