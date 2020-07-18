@@ -6,11 +6,11 @@ function MessageBox(props) {
 
   useEffect(() => {
     // element.current.focus()
-    window.onkeydown = event => {
+    window.addEventListener("keydown", event => {
       if (event.key === "Enter") {
         element.current.focus()
       }
-    }
+    })
   }, [])
 
   const onKeyDown = event => {
@@ -20,8 +20,8 @@ function MessageBox(props) {
         props.onMessage(event.target.value)
         event.target.value = ""
         event.target.placeholder = "Press enter to focus"
-        element.current.blur()
       }
+      element.current.blur()
     }
 
     event.stopPropagation(); // don't trigger movement
