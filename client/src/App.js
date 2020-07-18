@@ -1,19 +1,14 @@
 import React, { Component } from 'react';
-import logo from './map.jpg';
+import mapBackground from './map.jpg';
 import './App.css';
-import { User } from './User';
+import { User, Avatar } from './User';
 import MessageBox from './MessageBox';
 
 const SPEED = 3;
 
-function Map(props) {
-  const styles = {
-    "--x": props.x,
-    "--y": props.y,
-  };
-
+function Map() {
   return (
-    <img className="map" style={styles} src={logo}/>
+    <img className="map" src={mapBackground}/>
   );
 }
 
@@ -22,7 +17,7 @@ class App extends Component {
     super();
 
     this.state = {
-      self: new User(),
+      self: new User(3000, 2500),
       move: {
         up: false,
         left: false,
@@ -81,15 +76,26 @@ class App extends Component {
 
   render() {
     const self = this.state.self;
+    const cssPosition = {
+      "--origin-x": self.x,
+      "--origin-y": self.y,
+    };
+
     return (
       <div
         className="App"
         tabIndex="0" // Necessary to accept input
         onKeyDown={this.handleKeyDown}
         onKeyUp={this.handleKeyUp}
+        style={cssPosition}
       >
+<<<<<<< HEAD
         <Map x={self.x} y={self.y} />
         <MessageBox />
+=======
+        <Map />
+        <Avatar user={self} />
+>>>>>>> 2e9f0f4... Show user avatar
       </div>
     );
   }

@@ -1,3 +1,7 @@
+* {
+  box-sizing: border-box;
+}
+
 body {
   overflow-x: hidden;
   overflow-y: hidden;
@@ -12,8 +16,33 @@ html, body, #root, .App {
 
 .map {
   position: absolute;
-  left: calc(50% - var(--x) * 1px);
-  top: calc(50% - var(--y) * 1px);
+  left: calc(50% - var(--origin-x) * 1px);
+  top: calc(50% - var(--origin-y) * 1px);
+}
+
+.user {
+  --size: 50px;
+  width: var(--size);
+  height: var(--size);
+  position: absolute;
+  left: calc(50% - (var(--user-x) - var(--origin-x)) * 1px);
+  top: calc(50% - (var(--user-y) - var(--origin-y)) * 1px);
+}
+
+.user .avatar {
+  border-radius: var(--size);
+  width: var(--size);
+  height: var(--size);
+
+  border: 4px solid white;
+  background: rgba(0, 0, 0, 0.5);
+}
+
+.user .name {
+  position: absolute;
+  width: 200%;
+  left: -50%;
+  text-align: center;
 }
 
 .MessageBox {
