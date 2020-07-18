@@ -14,6 +14,23 @@ function Map() {
   );
 }
 
+function Geofence(props) {
+  let inFence = props.location ? 1 : 0;
+  let style = {
+    opacity: inFence,
+    transform: `scale(${inFence})`,
+  };
+  let message = "";
+  if(props.location) {
+    message = props.location;
+  }
+  return (
+    <div className="Geofence acrylic" style={style}>
+      {message}
+    </div>
+  );
+}
+
 class App extends Component {
   constructor() {
     super();
@@ -35,6 +52,7 @@ class App extends Component {
 
     socket.on("connect", () => {
       this.state.self.id = socket.id;
+      console.log("Connected to server, socket id", socket.id);
     });
 
     socket.on("update", userStates => {
@@ -69,6 +87,9 @@ class App extends Component {
 
   componentDidMount() {
     requestAnimationFrame((this.tick).bind(this))
+    setInterval(() => {
+      socket.emit("position", {x: this.state.self.x, y: this.state.self.y});
+    }, 100);
   }
 
   tick() {
@@ -79,7 +100,7 @@ class App extends Component {
         SPEED * (move.down - move.up)
       ),
     });
-    socket.emit("position", {x: self.x, y: self.y});
+    
     requestAnimationFrame((this.tick).bind(this))
   }
 
@@ -138,6 +159,14 @@ class App extends Component {
       return <Avatar key={user.id} user={user} />;
     });
 
+    let content = this.state.isAuthed ? <>
+      <Avatar user={self} />
+      <MessageBox onMessage={this.handleMessage.bind(this)} />
+      <Geofence location={this.state.self.location} />
+    </> : <>
+      <Login setIsAuthed={this.handleIsAuthed.bind(this)} />
+    </>
+
     return (
       <div
         className="App"
@@ -148,9 +177,7 @@ class App extends Component {
       >
         <Map />
         {otherAvatars}
-        {this.state.isAuthed && <Avatar user={self} />}
-        {this.state.isAuthed && <MessageBox onMessage={this.handleMessage.bind(this)} />}
-        {!this.state.isAuthed && <Login setIsAuthed={this.handleIsAuthed.bind(this)} />}
+        {content}
       </div>
     );
   }

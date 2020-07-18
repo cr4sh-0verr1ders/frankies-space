@@ -75,6 +75,8 @@ function Avatar(props) {
   };
   if (user.self) style.transition = "none"
 
+  let hasMessage = user.message ? 1 : 0;
+
   return (
     <div
       className="user"
@@ -92,8 +94,8 @@ function Avatar(props) {
       <div
         className="message acrylic"
         style={{
-          opacity: user.message.length > 0 ? 1 : 0,
-          transform: `scale(${user.message.length > 0 ? 1 : 0})`
+          opacity: hasMessage,
+          transform: `scale(${hasMessage})`
         }}
       >
         {user.message}

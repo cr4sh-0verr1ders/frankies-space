@@ -23,13 +23,13 @@ html, body, #root, .App {
 
 .user {
   --size: 50px;
-  width: var(--size);
+  width: 100%;
   height: var(--size);
   position: absolute;
   font-size: 20px;
   text-align: center;
 
-  left: calc(50% - calc(var(--origin-x) * 1px) - var(--size)/2);
+  left: calc(0px - calc(var(--origin-x) * 1px) - var(--size)/2);
   top: calc(50% - calc(var(--origin-y) * 1px) - var(--size)/2);
   transform: translate(calc(var(--user-x) * 1px), calc(var(--user-y) * 1px));
   transition-property: transform;
@@ -68,6 +68,24 @@ html, body, #root, .App {
   transform-origin: 0% 100%;
 }
 
+.Geofence {
+  position: fixed;
+  display: inline-block;
+
+  width: 300px;
+  text-align: center;
+  left: 0;
+  right: 0;
+  margin-left: auto;
+  margin-right: auto;
+
+  top: 8px;
+  padding: 8px 16px;
+  color: white;
+  transition: 0.3s;
+  transform-origin: 50% 0%;
+}
+
 .acrylic {
   background-color: rgba(0, 0, 0, 0.5);
   backdrop-filter: blur(15px);
@@ -81,7 +99,7 @@ html, body, #root, .App {
   transform: translateX(-50%);
   border: none;
   outline: none;
-  width: 400px;
+  width: 300px;
   height: 50px;
   margin-bottom: 10px;
   color: white;
