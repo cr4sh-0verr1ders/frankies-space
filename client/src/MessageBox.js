@@ -34,7 +34,7 @@ function MessageBox(props) {
   return (
     <input
       ref={element}
-      maxlength="1000"
+      maxlength="400"
       className="MessageBox acrylic"
       placeholder="Type a message"
       onKeyDown={onKeyDown}

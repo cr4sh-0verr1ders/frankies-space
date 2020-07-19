@@ -16,6 +16,7 @@ function Login({ setIsAuthed }) {
                 })
             } catch(e) {}
         }
+        
     }
 
     useEffect(window.updateStatus, [])
