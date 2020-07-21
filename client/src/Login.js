@@ -23,7 +23,7 @@ function Login({ setIsAuthed }) {
 
     return (
         <div className="loginModal acrylic">
-            <img src="https://unswio.herokuapp.com/frankie.png" />
+            <img style={{width: "200px"}} src="https://unswio.herokuapp.com/frankie.png" />
             <br />
             <h1>Frankie's Space</h1>
             <div className="fb-login-button" data-size="large" data-button-type="continue_with" data-layout="rounded" data-auto-logout-link="false" data-use-continue-as="true" data-width="" data-onlogin="updateStatus"></div>
